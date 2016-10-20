@@ -1,0 +1,62 @@
+{% extends "notes/bases/base.html" %}
+{% block nav %}
+    {% comment %}<ul id="dropdown1" class="dropdown-content">
+        <form action="">
+            <li></li>
+            <li style="width:500px;"><input type="text"></li>
+            
+            <li><button type="submit"><i class="material-icons">search</i></button></li> 
+        </form>
+    </ul>{% endcomment %}
+    <nav>
+        <div class="nav-wrapper teal">
+            <a href="#" class="brand-logo center">Tnote</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+               <ul class="right hide-on-med-and-down">
+                    <li><a href="{% url 'notes:note-add' %}"><span class="plusicon">+</span></a></li>
+                    {% comment %}<li><a href="#"><i class="material-icons">search</i></a></li>{% endcomment %}
+               </ul>
+               <ul class="side-nav" id="mobile-demo">
+                    <li><a href="{% url 'notes:note-add' %}"><span class="plusicon">+ Add a note</span></a></li>
+               </ul>
+        </div>
+    </nav>
+{% endblock nav %}
+{% block body %}
+{% if notes %}
+<div class="row">
+    {% csrf_token %}
+    <nav>
+        <div class="nav-wrapper teal lighten-3" style="margin-top:10px;">
+            <div class="input-field black-text">
+                <input id="search" type="search" required>
+                <label for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons" id="close_search" onclick="$('#search').val('').keyup()">close</i>
+            </div>
+        </div>
+    </nav>
+</div>
+    <div class="row" id="sresults">
+        {% for note in notes  %}
+        <a href="{% url 'notes:note-detail' note.pk %}">
+            <div class="col s12 m6">
+                <div class="card {{note.color}}">
+                    <div class="card-content black-text">
+                    <span class="card-title">{{note.title}}</span>
+                    <p>{{note.note|truncatechars:40}}</p>
+                    </div>
+                </div>
+                </div>
+            </a>
+        
+        {% endfor %}
+    </div>
+{% else %}
+    <h5 style="text-align:center;font-size:5vh;margin-top: calc(50vh - 7vh);">You have no notes click <a href="{% url 'notes:note-add' %}">here</a> to add one!</h5>
+{% endif %}
+    
+{% endblock body %}
+{% block extra_scripts %}
+     {% load staticfiles %}
+    <script src="{% static 'notes/js/ajax_search.js' %}"></script>
+{% endblock extra_scripts %}

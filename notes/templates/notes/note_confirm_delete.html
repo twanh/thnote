@@ -1,0 +1,28 @@
+{% extends "notes/bases/base.html" %}
+
+{% block nav_color %}
+    red lighten-3
+{% endblock nav_color %}
+{% block body %}
+
+<div class="row">
+    <div class="col s12 m12">
+        <div class="card ">
+            <form action="" method="POST">
+                {% csrf_token %}
+            <div class="card-content black-text">
+                <span class="card-title">Are you sure you want to delete {{object}}</span>
+                <p>You will not be able to recover this note!</p>
+            </div>
+            <div class="card-action">
+                <button class="btn" type="submit">I'm Sure!</button>
+                <a href="{% url 'notes:note-detail' object.pk %}" class="btn red lighten-3">Cancel</a>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    
+{% endblock body %}

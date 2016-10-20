@@ -1,0 +1,13 @@
+{% for field in form %}
+<div class="row">
+    <div class="error_field col s12">
+        {{field.error}}
+    </div>
+    <div class="input-field col s2">
+          <label>{{field.label_tag}}</label>
+    </div>
+    <div class="input-field col s10">
+          {{field}}
+    </div>
+</div>
+{% endfor %}

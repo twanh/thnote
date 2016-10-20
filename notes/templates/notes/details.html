@@ -1,0 +1,52 @@
+{% extends "notes/bases/base.html" %}
+{% block nav_color %}
+    {{notes.color}}
+{% endblock nav_color %}
+{% block nav_items %}
+    <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-med-and-down">
+        <li>
+            <a href="{% url 'notes:note-delete' notes.pk %}">
+                <i class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete Note">delete</i>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'notes:note-favorite' notes.pk %}">
+                {% if notes.is_favorite %}
+                    <i class="material-icons tooltipped"data-position="bottom" data-delay="50" data-tooltip="Un-favorite Note">favorite</i>
+                {% else %}
+                    <i class="material-icons tooltipped"data-position="bottom" data-delay="50" data-tooltip="Favorite Note">favorite_border</i>
+                {% endif %}
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'notes:note-update' notes.pk %}">
+                <i class="material-icons tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Note">edit</i>
+            </a>
+        </li>
+    </ul>
+    <ul class="side-nav" id="mobile-demo">
+        <li>
+            <a href="#"><i class="material-icons ">delete</i> Delete note</a>
+        </li>
+        <li>
+            {% if notes.is_favorite %}
+                <a href="{% url 'notes:note-favorite' notes.pk %}"><i class="material-icons ">favorite</i>Un-favorite</a>
+            {% else %}
+                <a href="{% url 'notes:note-favorite' notes.pk %}"><i class="material-icons ">favorite_border</i> Favorite</a>
+            {% endif %}
+        </li>
+        <li>
+            <a href="#"><i class="material-icons ">edit</i> Edit</a>
+        </li>
+    </ul>
+{% endblock nav_items %}
+{% block body %}
+    <h1 style="text-align: center">{{ notes.title }}</h1>
+    <p>{{ notes.note|linebreaksbr  }}</p>
+    {% if notes.done %}
+        <h3>Done!</h3>
+    {% endif %}
+    <hr style="margin-top: 50px;">
+    <span class="grey-text">Created On: {{notes.created_on}}</span>
+{% endblock body %}

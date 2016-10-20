@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Tnote{% endblock title %}</title>
+    {% load staticfiles %}
+    <!-- Compiled and minified CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link rel="stylesheet" href="{% static 'notes/css/main.css'%}">
+</head>
+<body>
+
+    
+    {% block nav %}
+        <nav>
+            <div class="nav-wrapper {% block nav_color %}teal{% endblock nav_color %}">
+                
+            <a href="{% url 'notes:index' %}" class="brand-logo left"><i class="material-icons">arrow_back</i></a>
+            {% block nav_items%}
+            {%endblock nav_items%}
+        </nav>
+    {% endblock nav %}
+
+    <div class="container">
+        {% block body %}
+
+        {% endblock body %}
+    </div>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script src="{% static 'notes/js/main.js' %}"></script>
+
+    {% block extra_scripts %}
+
+    {% endblock extra_scripts %}
+
+</body>
+</html>

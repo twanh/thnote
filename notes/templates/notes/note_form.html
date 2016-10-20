@@ -1,0 +1,26 @@
+{% extends "notes/bases/base.html" %}
+{% block title %}
+    Add Note
+{% endblock title %}
+{% block body %}
+<div class="row">
+     <form class="col s12" action="" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    {% include "notes/includes/basic_form.html" %}
+     <div class="row">
+        <div class="input-field col s12">
+          <button type="submit" class="btn" onclick="Materialize.toast('Note is saved!', 6000)">Submit</button>
+        </div>
+      </div>
+    </form>
+</div>
+
+{% endblock body %}
+
+{% block extra_scripts %}
+  <script>
+    $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>
+{% endblock extra_scripts %}
