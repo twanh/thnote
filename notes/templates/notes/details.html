@@ -43,7 +43,7 @@
 {% endblock nav_items %}
 {% block body %}
     <h1 style="text-align: center">{{ notes.title }}</h1>
-    <p>{{ notes.note|linebreaksbr  }}</p>
+    <p>{{ notes.note|safe  }}</p>
     {% if notes.done %}
         <h3>Done!</h3>
     {% endif %}
